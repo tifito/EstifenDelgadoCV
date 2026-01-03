@@ -42,7 +42,8 @@ def delete_task(request, task_id):
         return redirect('tasks')
     
 def home(request):
-    return render(request,'home.html')
+    return render(request,'home_FALSO.html')
+
    
 def signin(request):
     if request.method == 'GET':

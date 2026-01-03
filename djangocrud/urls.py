@@ -24,11 +24,6 @@ urlpatterns = [
     path('', views.home, name='home'),
 ]
 
-# Intentar crear el superusuario automáticamente en Render/local
-try:
-    import perfil.createsuper
-except Exception:
-    pass
 
 # Archivos estáticos en DEBUG
 from django.conf import settings

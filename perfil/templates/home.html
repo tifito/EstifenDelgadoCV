@@ -3,33 +3,54 @@
 {% block content %}
 <main class="container py-5">
 
+    {% if perfil %}
     <section class="card border-0 shadow-sm rounded-4 p-4 mb-4">
         <div class="row align-items-center">
             <div class="col-md-3 text-center mb-3 mb-md-0">
                 <div class="bg-light rounded-circle d-inline-block p-2 shadow-sm">
-                    <img src="https://ui-avatars.com/api/?name=Estifen+Delgado&size=150&background=0D6EFD&color=fff" 
-                         class="rounded-circle img-fluid" alt="Foto Perfil">
+                    {% if perfil.fotoperfil %}
+                        <img src="{{ perfil.fotoperfil.url }}" class="rounded-circle img-fluid" alt="Foto Perfil">
+                    {% else %}
+                        <img src="https://ui-avatars.com/api/?name={{ perfil.nombres|urlencode }}+{{ perfil.apellidos|urlencode }}&size=150&background=0D6EFD&color=fff" 
+                        class="rounded-circle img-fluid" alt="Foto Perfil">
+                    {% endif %}
                 </div>
             </div>
             <div class="col-md-9 text-center text-md-start">
-                <h1 class="fw-bold display-5 mb-1">Estifen Delgado</h1>
-                <h4 class="text-primary fw-light mb-4">Estudiante / Desarrollador en formación</h4>
+                <h1 class="fw-bold display-5 mb-1">{{ perfil.nombres }} {{ perfil.apellidos }}</h1>
+                <h4 class="text-primary fw-light mb-4">{{ perfil.descripcionperfil }}</h4>
                 
                 <div class="row g-3">
                     <div class="col-sm-6 col-lg-4">
-                        <p class="mb-0 text-muted"><i class="bi bi-calendar-event me-2"></i><strong>Edad:</strong> 18 años</p>
+                        <p class="mb-0 text-muted"><i class="bi bi-calendar-event me-2"></i><strong>Fecha de nacimiento:</strong> {{ perfil.fechanacimiento }}</p>
                     </div>
                     <div class="col-sm-6 col-lg-4">
-                        <p class="mb-0 text-muted"><i class="bi bi-geo-alt me-2"></i><strong>Ciudad:</strong> Ecuador</p>
+                        <p class="mb-0 text-muted"><i class="bi bi-geo-alt me-2"></i><strong>Ciudad / Lugar:</strong> {{ perfil.lugarnacimiento }}</p>
                     </div>
                     <div class="col-sm-6 col-lg-4">
-                        <p class="mb-0 text-muted"><i class="bi bi-envelope me-2"></i><strong>Email:</strong> estifen@email.com</p>
+                        <p class="mb-0 text-muted"><i class="bi bi-flag me-2"></i><strong>Nacionalidad:</strong> {{ perfil.nacionalidad }}</p>
                     </div>
-                </div>
-                <div class="mt-4">
-                    <a href="#" class="btn btn-primary rounded-pill px-4 shadow-sm">
-                        <i class="bi bi-file-earmark-pdf me-2"></i>VER / DESCARGAR CV
-                    </a>
+                    <div class="col-sm-6 col-lg-4">
+                        <p class="mb-0 text-muted"><i class="bi bi-person-badge me-2"></i><strong>Cédula:</strong> {{ perfil.numerocedula }}</p>
+                    </div>
+                    <div class="col-sm-6 col-lg-4">
+                        <p class="mb-0 text-muted"><i class="bi bi-gender-ambiguous me-2"></i><strong>Sexo:</strong> {{ perfil.get_sexo_display }}</p>
+                    </div>
+                    <div class="col-sm-6 col-lg-4">
+                        <p class="mb-0 text-muted"><i class="bi bi-heart me-2"></i><strong>Estado civil:</strong> {{ perfil.estadocivil }}</p>
+                    </div>
+                    <div class="col-sm-6 col-lg-4">
+                        <p class="mb-0 text-muted"><i class="bi bi-car-front-fill me-2"></i><strong>Licencia de conducir:</strong> {{ perfil.licenciaconducir|default:"No" }}</p>
+                    </div>
+                    <div class="col-sm-6 col-lg-4">
+                        <p class="mb-0 text-muted"><i class="bi bi-telephone me-2"></i><strong>Teléfono convencional:</strong> {{ perfil.telefonoconvencional|default:"No tiene" }}</p>
+                    </div>
+                    <div class="col-sm-6 col-lg-4">
+                        <p class="mb-0 text-muted"><i class="bi bi-telephone-fill me-2"></i><strong>Teléfono fijo:</strong> {{ perfil.telefonofijo|default:"No tiene" }}</p>
+                    </div>
+                    <div class="col-sm-6 col-lg-4">
+                        <p class="mb-0 text-muted"><i class="bi bi-envelope me-2"></i><strong>Email:</strong> {{ perfil.email|default:"No tiene" }}</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -38,45 +59,13 @@
     <section class="card border-0 shadow-sm rounded-4 p-4 mb-4">
         <h3 class="fw-bold text-dark mb-3"><i class="bi bi-person-lines-fill me-2 text-primary"></i>Perfil</h3>
         <p class="lead text-muted" style="font-size: 1.1rem;">
-            Estudiante interesado en el desarrollo de software, bases de datos y
-            tecnologías web. Motivado por aprender y mejorar constantemente
-            mis habilidades técnicas.
+            {{ perfil.descripcionperfil }}
         </p>
     </section>
 
-    <section class="card border-0 shadow-sm rounded-4 p-4 mb-4">
-        <h3 class="fw-bold text-dark mb-3"><i class="bi bi-mortarboard-fill me-2 text-primary"></i>Educación</h3>
-        <div class="ms-3">
-            <div class="mb-3">
-                <h5 class="fw-bold mb-0">Bachillerato</h5>
-                <span class="text-muted">Unidad Educativa XXXXX</span>
-            </div>
-            <div>
-                <h5 class="fw-bold mb-0">Universidad</h5>
-                <span class="text-muted">Carrera: XXXXX</span>
-            </div>
-        </div>
-    </section>
-
-    <section class="card border-0 shadow-sm rounded-4 p-4 mb-4">
-        <h3 class="fw-bold text-dark mb-3"><i class="bi bi-star-fill me-2 text-primary"></i>Habilidades</h3>
-        <div class="row">
-            <div class="col-md-6">
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item border-0 px-0"><i class="bi bi-check2-circle me-2 text-success"></i>Python</li>
-                    <li class="list-group-item border-0 px-0"><i class="bi bi-check2-circle me-2 text-success"></i>Django</li>
-                    <li class="list-group-item border-0 px-0"><i class="bi bi-check2-circle me-2 text-success"></i>HTML & CSS</li>
-                </ul>
-            </div>
-            <div class="col-md-6">
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item border-0 px-0"><i class="bi bi-check2-circle me-2 text-success"></i>SQL</li>
-                    <li class="list-group-item border-0 px-0"><i class="bi bi-check2-circle me-2 text-success"></i>Git & GitHub</li>
-                    <li class="list-group-item border-0 px-0"><i class="bi bi-check2-circle me-2 text-success"></i>Bootstrap</li>
-                </ul>
-            </div>
-        </div>
-    </section>
+    {% else %}
+    <p>No hay datos de perfil para mostrar.</p>
+    {% endif %}
 
 </main>
 {% endblock %}

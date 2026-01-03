@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<main class="container py-5">
+
+    <h2 class="mb-4 text-center fw-bold">Cursos Realizados</h2>
+
+    {% if cursos %}
+        <div class="row g-4">
+            {% for curso in cursos %}
+            <div class="col-md-6">
+                <div class="card border rounded-3 shadow-sm p-4 d-flex flex-column h-100" style="background-color: #f9f9f9;">
+                    <h5 class="fw-bold mb-3">{{ curso.nombrecurso }}</h5>
+
+                    <p class="mb-1"><strong>Fecha Inicio:</strong> {{ curso.fechainicio }}</p>
+                    <p class="mb-1"><strong>Fecha Fin:</strong> {{ curso.fechafin }}</p>
+                    <p class="mb-1"><strong>Total Horas:</strong> {{ curso.totalhoras }}</p>
+                    <p class="mb-1"><strong>Descripción:</strong> {{ curso.descripcioncurso }}</p>
+                    <p class="mb-1"><strong>Entidad Patrocinadora:</strong> {{ curso.entidadpatrocinadora }}</p>
+                    
+                    {% if curso.nombrecontactoauspicia %}
+                        <p class="mb-1"><strong>Contacto Auspicia:</strong> {{ curso.nombrecontactoauspicia }}</p>
+                    {% endif %}
+                    {% if curso.telefonocontactoauspicia %}
+                        <p class="mb-1"><strong>Teléfono Contacto:</strong> {{ curso.telefonocontactoauspicia }}</p>
+                    {% endif %}
+                    {% if curso.emailempresapatrocinadora %}
+                        <p class="mb-1"><strong>Email:</strong> {{ curso.emailempresapatrocinadora }}</p>
+                    {% endif %}
+
+                    <!-- Botón abajo siempre -->
+                    <div class="mt-auto d-flex justify-content-end">
+                        {% if curso.rutacertificado %}
+                            <a href="{{ curso.rutacertificado }}" target="_blank" 
+                               class="btn btn-outline-secondary fw-semibold">
+                                Ver Diploma
+                            </a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p class="text-center">No hay cursos registrados.</p>
+    {% endif %}
+
+</main>
+{% endblock %}

@@ -22,6 +22,7 @@ from perfil import views  # Vistas de tu app "perfil"
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.home, name='home'),
+    path('cursos/', views.cursos, name='cursos'), 
 ]
 
 

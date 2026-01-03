@@ -11,45 +11,45 @@
                     {% if perfil.fotoperfil %}
                         <img src="{{ perfil.fotoperfil.url }}" class="rounded-circle img-fluid" alt="Foto Perfil">
                     {% else %}
-                        <img src="https://ui-avatars.com/api/?name={{ perfil.nombres|urlencode }}+{{ perfil.apellidos|urlencode }}&size=150&background=0D6EFD&color=fff" 
+                        <img src="https://ui-avatars.com/api/?name={{ perfil.nombres|urlencode }}+{{ perfil.apellidos|urlencode }}&size=150&background=34495e&color=fff" 
                         class="rounded-circle img-fluid" alt="Foto Perfil">
                     {% endif %}
                 </div>
             </div>
             <div class="col-md-9 text-center text-md-start">
                 <h1 class="fw-bold display-5 mb-1">{{ perfil.nombres }} {{ perfil.apellidos }}</h1>
-                <h4 class="text-primary fw-light mb-4">{{ perfil.descripcionperfil }}</h4>
+                <h4 class="fw-light mb-4" style="color: #1abc9c;">{{ perfil.descripcionperfil }}</h4>
                 
                 <div class="row g-3">
                     <div class="col-sm-6 col-lg-4">
-                        <p class="mb-0 text-muted"><i class="bi bi-calendar-event me-2"></i><strong>Fecha de nacimiento:</strong> {{ perfil.fechanacimiento }}</p>
+                        <p class="mb-0 text-muted"><i class="bi bi-calendar-event me-2" style="color: #1abc9c;"></i><strong>Fecha de nacimiento:</strong> {{ perfil.fechanacimiento }}</p>
                     </div>
                     <div class="col-sm-6 col-lg-4">
-                        <p class="mb-0 text-muted"><i class="bi bi-geo-alt me-2"></i><strong>Ciudad / Lugar:</strong> {{ perfil.lugarnacimiento }}</p>
+                        <p class="mb-0 text-muted"><i class="bi bi-geo-alt me-2" style="color: #1abc9c;"></i><strong>Ciudad / Lugar:</strong> {{ perfil.lugarnacimiento }}</p>
                     </div>
                     <div class="col-sm-6 col-lg-4">
-                        <p class="mb-0 text-muted"><i class="bi bi-flag me-2"></i><strong>Nacionalidad:</strong> {{ perfil.nacionalidad }}</p>
+                        <p class="mb-0 text-muted"><i class="bi bi-flag me-2" style="color: #1abc9c;"></i><strong>Nacionalidad:</strong> {{ perfil.nacionalidad }}</p>
                     </div>
                     <div class="col-sm-6 col-lg-4">
-                        <p class="mb-0 text-muted"><i class="bi bi-person-badge me-2"></i><strong>Cédula:</strong> {{ perfil.numerocedula }}</p>
+                        <p class="mb-0 text-muted"><i class="bi bi-person-badge me-2" style="color: #1abc9c;"></i><strong>Cédula:</strong> {{ perfil.numerocedula }}</p>
                     </div>
                     <div class="col-sm-6 col-lg-4">
-                        <p class="mb-0 text-muted"><i class="bi bi-gender-ambiguous me-2"></i><strong>Sexo:</strong> {{ perfil.get_sexo_display }}</p>
+                        <p class="mb-0 text-muted"><i class="bi bi-gender-ambiguous me-2" style="color: #1abc9c;"></i><strong>Sexo:</strong> {{ perfil.get_sexo_display }}</p>
                     </div>
                     <div class="col-sm-6 col-lg-4">
-                        <p class="mb-0 text-muted"><i class="bi bi-heart me-2"></i><strong>Estado civil:</strong> {{ perfil.estadocivil }}</p>
+                        <p class="mb-0 text-muted"><i class="bi bi-heart me-2" style="color: #1abc9c;"></i><strong>Estado civil:</strong> {{ perfil.estadocivil }}</p>
                     </div>
                     <div class="col-sm-6 col-lg-4">
-                        <p class="mb-0 text-muted"><i class="bi bi-car-front-fill me-2"></i><strong>Licencia de conducir:</strong> {{ perfil.licenciaconducir|default:"No" }}</p>
+                        <p class="mb-0 text-muted"><i class="bi bi-car-front-fill me-2" style="color: #1abc9c;"></i><strong>Licencia de conducir:</strong> {{ perfil.licenciaconducir|default:"No" }}</p>
                     </div>
                     <div class="col-sm-6 col-lg-4">
-                        <p class="mb-0 text-muted"><i class="bi bi-telephone me-2"></i><strong>Teléfono convencional:</strong> {{ perfil.telefonoconvencional|default:"No tiene" }}</p>
+                        <p class="mb-0 text-muted"><i class="bi bi-telephone me-2" style="color: #1abc9c;"></i><strong>Teléfono convencional:</strong> {{ perfil.telefonoconvencional|default:"No tiene" }}</p>
                     </div>
                     <div class="col-sm-6 col-lg-4">
-                        <p class="mb-0 text-muted"><i class="bi bi-telephone-fill me-2"></i><strong>Teléfono fijo:</strong> {{ perfil.telefonofijo|default:"No tiene" }}</p>
+                        <p class="mb-0 text-muted"><i class="bi bi-telephone-fill me-2" style="color: #1abc9c;"></i><strong>Teléfono fijo:</strong> {{ perfil.telefonofijo|default:"No tiene" }}</p>
                     </div>
                     <div class="col-sm-6 col-lg-4">
-                        <p class="mb-0 text-muted"><i class="bi bi-envelope me-2"></i><strong>Email:</strong> {{ perfil.email|default:"No tiene" }}</p>
+                        <p class="mb-0 text-muted"><i class="bi bi-envelope me-2" style="color: #1abc9c;"></i><strong>Email:</strong> {{ perfil.email|default:"No tiene" }}</p>
                     </div>
                 </div>
             </div>
@@ -57,7 +57,9 @@
     </section>
 
     <section class="card border-0 shadow-sm rounded-4 p-4 mb-4">
-        <h3 class="fw-bold text-dark mb-3"><i class="bi bi-person-lines-fill me-2 text-primary"></i>Perfil</h3>
+        <h3 class="fw-bold text-dark mb-3">
+            <i class="bi bi-person-lines-fill me-2" style="color: #1abc9c;"></i>Perfil
+        </h3>
         <p class="lead text-muted" style="font-size: 1.1rem;">
             {{ perfil.descripcionperfil }}
         </p>

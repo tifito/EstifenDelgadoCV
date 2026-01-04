@@ -3,86 +3,103 @@
 {% block content %}
 <main class="container py-5">
 
-    <h2 class="mb-4">Venta de Garage</h2>
+    <h2 class="mb-5 text-center fw-bold">Venta de Garage</h2>
 
     {% if ventagarage %}
-        <div class="row g-4">
+        <div class="row g-4 justify-content-center">
             {% for item in ventagarage %}
             <div class="col-md-6">
-                <div class="card border-0 shadow-sm rounded-4 p-4 h-100 producto-card">
+                <div class="card producto-card h-100 p-4">
+
                     <div class="row align-items-center">
-                        <!-- Imagen a la izquierda -->
+                        <!-- Imagen -->
                         <div class="col-md-4 text-center mb-3 mb-md-0">
                             {% if item.rutaproducto %}
-                                <img src="{{ item.rutaproducto }}" alt="{{ item.nombreproducto }}" class="img-fluid rounded shadow-sm">
+                                <img src="{{ item.rutaproducto }}"
+                                     alt="{{ item.nombreproducto }}"
+                                     class="img-fluid rounded-3 shadow-sm">
                             {% else %}
-                                <img src="https://m.media-amazon.com/images/I/61kJwlX9NOL.jpg" 
-                                     alt="{{ item.nombreproducto }}" class="img-fluid rounded shadow-sm">
+                                <img src="https://via.placeholder.com/300x300?text=Sin+Imagen"
+                                     alt="Sin imagen disponible"
+                                     class="img-fluid rounded-3 shadow-sm">
                             {% endif %}
                         </div>
-                        <!-- Info a la derecha -->
-                        <div class="col-md-8">
-                            <h5 class="fw-bold">{{ item.nombreproducto }}</h5>
 
-                            <!-- Estado con badge verde -->
-                            <p class="mb-1">
-                                <strong>Estado:</strong> 
-                                <span class="estado-badge">{{ item.estadoproducto }}</span>
+                        <!-- Info -->
+                        <div class="col-md-8">
+                            <h5 class="fw-bold mb-2">
+                                <i class="bi bi-box-seam me-2 text-primary"></i>
+                                {{ item.nombreproducto }}
+                            </h5>
+
+                            <!-- Estado -->
+                            <p class="mb-1 text-muted">
+                                <i class="bi bi-check-circle me-2"></i>
+                                <span class="estado-badge">
+                                    {{ item.estadoproducto }}
+                                </span>
                             </p>
 
-                            <p class="mb-1"><strong>Valor:</strong> ${{ item.valordelbien|default:"Consultar" }}</p>
-                            <p class="mb-1"><strong>Descripción:</strong> {{ item.descripcion }}</p>
+                            <!-- Precio -->
+                            <p class="mb-1 text-muted">
+                                <i class="bi bi-cash-coin me-2"></i>
+                                ${{ item.valordelbien|default:"Consultar" }}
+                            </p>
 
+                            <!-- Descripción -->
+                            <p class="mb-3 text-muted">
+                                <i class="bi bi-info-circle me-2"></i>
+                                {{ item.descripcion }}
+                            </p>
+
+                            <!-- Botón -->
                             {% if item.rutaproducto %}
-                            <div class="d-flex justify-content-end mt-3">
-                                <a href="{{ item.rutaproducto }}" target="_blank" class="btn btn-warning">
-                                    Ver Imagen/Detalle
+                            <div class="d-flex justify-content-end">
+                                <a href="{{ item.rutaproducto }}"
+                                   target="_blank"
+                                   rel="noopener noreferrer"
+                                   class="btn btn-outline-primary fw-semibold">
+                                    <i class="bi bi-image me-1"></i>
+                                    Ver imagen
                                 </a>
                             </div>
                             {% endif %}
                         </div>
                     </div>
+
                 </div>
             </div>
             {% endfor %}
         </div>
     {% else %}
-        <p>No hay productos en venta registrados.</p>
+        <p class="text-center text-muted">No hay productos en venta registrados.</p>
     {% endif %}
 
 </main>
 
 <style>
-/* Animación suave para tarjetas */
+/* Tarjeta Garage */
 .producto-card {
+    background: linear-gradient(135deg, #f8fafc, #eef2f7);
+    border-left: 4px solid #2563eb;
+    border-radius: 16px;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.12);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .producto-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    transform: translateY(-6px);
+    box-shadow: 0 14px 28px rgba(0,0,0,0.2);
 }
 
-/* Botón naranja agradable */
-.btn-warning {
-    background-color: #e67e22;
-    border-color: #e67e22;
-}
-
-.btn-warning:hover {
-    background-color: #f39c12;
-    border-color: #e67e22;
-}
-
-/* Badge verde para el estado */
+/* Badge estado */
 .estado-badge {
-    display: inline-block;
-    background-color: #27ae60;
-    color: white;
-    padding: 3px 10px;
-    border-radius: 12px;
-    font-size: 0.9rem;
-    font-weight: 500;
+    background-color: #e8f0fe;
+    color: #2563eb;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
 }
 </style>
 {% endblock %}

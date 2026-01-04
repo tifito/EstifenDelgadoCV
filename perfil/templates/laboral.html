@@ -3,54 +3,64 @@
 {% block content %}
 <main class="container py-5">
 
-    <h2 class="mb-4">Productos Laborales</h2>
+    <h2 class="mb-5 text-center fw-bold">Productos Laborales</h2>
 
     {% if productolaboral %}
-        <div class="row g-4">
+        <div class="row g-4 justify-content-center">
             {% for item in productolaboral %}
             <div class="col-md-6">
-                <div class="card border-0 shadow-sm rounded-4 p-4 h-100 producto-card">
-                    <h5 class="fw-bold">{{ item.nombreproducto }}</h5>
-                    <p class="mb-1"><strong>Fecha:</strong> {{ item.fechaproducto }}</p>
-                    <p class="mb-1"><strong>Descripción:</strong> {{ item.descripcion }}</p>
+                <div class="card producto-card d-flex flex-column h-100 p-4">
 
-                    {% if item.rutaproducto %}
-                    <div class="d-flex justify-content-end mt-3">
-                        <a href="{{ item.rutaproducto }}" target="_blank" class="btn btn-success">
+                    <!-- Título -->
+                    <h5 class="fw-bold mb-2">
+                        <i class="bi bi-briefcase-fill me-2 text-primary"></i>
+                        {{ item.nombreproducto }}
+                    </h5>
+
+                    <!-- Fecha -->
+                    <p class="mb-2 text-muted">
+                        <i class="bi bi-calendar-event me-2"></i>
+                        {{ item.fechaproducto }}
+                    </p>
+
+                    <!-- Descripción -->
+                    <p class="mb-4 text-muted">
+                        <i class="bi bi-info-circle me-2"></i>
+                        {{ item.descripcion }}
+                    </p>
+
+                    <!-- Botón -->
+                    <div class="mt-auto d-flex justify-content-end">
+                        <a href="/" class="btn btn-outline-primary fw-semibold">
+                            <i class="bi bi-box-arrow-up-right me-1"></i>
                             Ver Proyecto
                         </a>
                     </div>
-                    {% endif %}
+
                 </div>
             </div>
             {% endfor %}
         </div>
     {% else %}
-        <p>No hay productos laborales registrados.</p>
+        <p class="text-center text-muted">No hay productos laborales registrados.</p>
     {% endif %}
 
 </main>
 
 <style>
-/* Animación suave para tarjetas */
+/* Tarjeta Producto Laboral */
+/* Tarjeta Producto Laboral */
 .producto-card {
+    background: linear-gradient(135deg, #f4f7ff, #e8eeff);
+    border-left: 4px solid #2563eb; /* AZUL */
+    border-radius: 16px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .producto-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    transform: translateY(-6px);
+    box-shadow: 0 14px 28px rgba(0,0,0,0.2);
 }
 
-/* Botón verde agradable */
-.btn-success {
-    background-color: #27ae60;
-    border-color: #27ae60;
-}
-
-.btn-success:hover {
-    background-color: #2ecc71;
-    border-color: #27ae60;
-}
 </style>
 {% endblock %}

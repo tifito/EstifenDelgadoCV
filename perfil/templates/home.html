@@ -4,70 +4,146 @@
 <main class="container py-5">
 
     {% if perfil %}
-    <section class="card border-0 shadow-sm rounded-4 p-4 mb-4">
+    <section class="card perfil-card border-0 rounded-4 p-4 mb-4">
         <div class="row align-items-center">
+
+            <!-- FOTO PERFIL -->
             <div class="col-md-3 text-center mb-3 mb-md-0">
-                <div class="bg-light rounded-circle d-inline-block p-2 shadow-sm">
+                <div class="foto-wrapper mx-auto">
                     {% if perfil.fotoperfil %}
-                        <img src="{{ perfil.fotoperfil.url }}" class="rounded-circle img-fluid" alt="Foto Perfil">
+                        <img src="{{ perfil.fotoperfil.url }}" class="foto-perfil" alt="Foto Perfil">
+                    {% elif perfil.fotodeperfil %}
+                        <img src="{{ perfil.fotodeperfil }}" class="foto-perfil" alt="Foto Perfil">
                     {% else %}
-                        <img src="https://static.wikia.nocookie.net/freddy-fazbears-pizza/images/a/a1/Freddy_Fazbear_%28Original%29.png/revision/latest?cb=20190304000253&path-prefix=es" 
-                        class="rounded-circle img-fluid" alt="Foto Perfil">
+                        <div class="perfil-placeholder d-flex flex-column justify-content-center align-items-center">
+                            <i class="bi bi-person-fill fs-1 text-primary mb-1"></i>
+                            <small class="text-muted">Sin foto</small>
+                        </div>
                     {% endif %}
                 </div>
             </div>
+
+            <!-- DATOS -->
             <div class="col-md-9 text-center text-md-start">
-                <h1 class="fw-bold display-5 mb-1">{{ perfil.nombres }} {{ perfil.apellidos }}</h1>
-                <h4 class="fw-light mb-4" style="color: #1abc9c;">{{ perfil.descripcionperfil }}</h4>
-                
+                <h1 class="fw-bold display-6 mb-3 text-dark">
+                    {{ perfil.nombres }} {{ perfil.apellidos }}
+                </h1>
+
                 <div class="row g-3">
                     <div class="col-sm-6 col-lg-4">
-                        <p class="mb-0 text-muted"><i class="bi bi-calendar-event me-2" style="color: #1abc9c;"></i><strong>Fecha de nacimiento:</strong> {{ perfil.fechanacimiento }}</p>
+                        <p class="mb-2 text-muted">
+                            <i class="bi bi-calendar-event me-2 text-primary"></i>
+                            <strong>Fecha de nacimiento:</strong> {{ perfil.fechanacimiento }}
+                        </p>
                     </div>
+
                     <div class="col-sm-6 col-lg-4">
-                        <p class="mb-0 text-muted"><i class="bi bi-geo-alt me-2" style="color: #1abc9c;"></i><strong>Ciudad / Lugar:</strong> {{ perfil.lugarnacimiento }}</p>
+                        <p class="mb-2 text-muted">
+                            <i class="bi bi-geo-alt me-2 text-primary"></i>
+                            <strong>Ciudad / Lugar:</strong> {{ perfil.lugarnacimiento }}
+                        </p>
                     </div>
+
                     <div class="col-sm-6 col-lg-4">
-                        <p class="mb-0 text-muted"><i class="bi bi-flag me-2" style="color: #1abc9c;"></i><strong>Nacionalidad:</strong> {{ perfil.nacionalidad }}</p>
+                        <p class="mb-2 text-muted">
+                            <i class="bi bi-flag me-2 text-primary"></i>
+                            <strong>Nacionalidad:</strong> {{ perfil.nacionalidad }}
+                        </p>
                     </div>
+
                     <div class="col-sm-6 col-lg-4">
-                        <p class="mb-0 text-muted"><i class="bi bi-person-badge me-2" style="color: #1abc9c;"></i><strong>Cédula:</strong> {{ perfil.numerocedula }}</p>
+                        <p class="mb-2 text-muted">
+                            <i class="bi bi-person-badge me-2 text-primary"></i>
+                            <strong>Cédula:</strong> {{ perfil.numerocedula }}
+                        </p>
                     </div>
+
                     <div class="col-sm-6 col-lg-4">
-                        <p class="mb-0 text-muted"><i class="bi bi-gender-ambiguous me-2" style="color: #1abc9c;"></i><strong>Sexo:</strong> {{ perfil.get_sexo_display }}</p>
+                        <p class="mb-2 text-muted">
+                            <i class="bi bi-gender-ambiguous me-2 text-primary"></i>
+                            <strong>Sexo:</strong> {{ perfil.get_sexo_display }}
+                        </p>
                     </div>
+
                     <div class="col-sm-6 col-lg-4">
-                        <p class="mb-0 text-muted"><i class="bi bi-heart me-2" style="color: #1abc9c;"></i><strong>Estado civil:</strong> {{ perfil.estadocivil }}</p>
+                        <p class="mb-2 text-muted">
+                            <i class="bi bi-heart me-2 text-primary"></i>
+                            <strong>Estado civil:</strong> {{ perfil.estadocivil }}
+                        </p>
                     </div>
+
                     <div class="col-sm-6 col-lg-4">
-                        <p class="mb-0 text-muted"><i class="bi bi-car-front-fill me-2" style="color: #1abc9c;"></i><strong>Licencia de conducir:</strong> {{ perfil.licenciaconducir|default:"No" }}</p>
+                        <p class="mb-2 text-muted">
+                            <i class="bi bi-car-front-fill me-2 text-primary"></i>
+                            <strong>Licencia:</strong> {{ perfil.licenciaconducir|default:"No" }}
+                        </p>
                     </div>
+
                     <div class="col-sm-6 col-lg-4">
-                        <p class="mb-0 text-muted"><i class="bi bi-telephone me-2" style="color: #1abc9c;"></i><strong>Teléfono convencional:</strong> {{ perfil.telefonoconvencional|default:"No tiene" }}</p>
+                        <p class="mb-2 text-muted">
+                            <i class="bi bi-telephone me-2 text-primary"></i>
+                            <strong>Teléfono:</strong> {{ perfil.telefonoconvencional|default:"No tiene" }}
+                        </p>
                     </div>
+
                     <div class="col-sm-6 col-lg-4">
-                        <p class="mb-0 text-muted"><i class="bi bi-telephone-fill me-2" style="color: #1abc9c;"></i><strong>Teléfono fijo:</strong> {{ perfil.telefonofijo|default:"No tiene" }}</p>
-                    </div>
-                    <div class="col-sm-6 col-lg-4">
-                        <p class="mb-0 text-muted"><i class="bi bi-envelope me-2" style="color: #1abc9c;"></i><strong>Email:</strong> {{ perfil.email|default:"No tiene" }}</p>
+                        <p class="mb-2 text-muted">
+                            <i class="bi bi-envelope me-2 text-primary"></i>
+                            <strong>Email:</strong> {{ perfil.email|default:"No tiene" }}
+                        </p>
                     </div>
                 </div>
             </div>
+
         </div>
     </section>
 
-    <section class="card border-0 shadow-sm rounded-4 p-4 mb-4">
-        <h3 class="fw-bold text-dark mb-3">
-            <i class="bi bi-person-lines-fill me-2" style="color: #1abc9c;"></i>Perfil
-        </h3>
-        <p class="lead text-muted" style="font-size: 1.1rem;">
+    <!-- PERFIL PROFESIONAL -->
+    <section class="card perfil-card border-0 rounded-4 p-4">
+        <h4 class="fw-bold mb-3 text-dark">
+            <i class="bi bi-person-lines-fill me-2 text-primary"></i>
+            Perfil Profesional
+        </h4>
+        <p class="text-muted" style="font-size: 1.05rem;">
             {{ perfil.descripcionperfil }}
         </p>
     </section>
 
     {% else %}
-    <p>No hay datos de perfil para mostrar.</p>
+    <p class="text-center text-muted">No hay datos de perfil para mostrar.</p>
     {% endif %}
 
 </main>
+
+<style>
+.perfil-card {
+    background: linear-gradient(135deg, #f0f9ff, #e0f2fe);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+}
+
+.foto-wrapper {
+    width: 190px;
+    height: 190px;
+    border-radius: 50%;
+    background: white;
+    padding: 8px;
+    box-shadow: 0 6px 14px rgba(0,0,0,0.12);
+}
+
+.foto-perfil {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.perfil-placeholder {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #e0f2fe, #bae6fd);
+    border: 3px dashed #93c5fd;
+}
+</style>
+
 {% endblock %}

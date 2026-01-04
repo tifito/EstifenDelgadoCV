@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<main class="container py-5">
+
+    <h2 class="mb-5 text-center fw-bold">Formación Académica</h2>
+
+    {% if academico %}
+        <div class="row g-4 justify-content-center">
+            {% for prod in academico %}
+            <div class="col-md-6">
+                <div class="card form-card h-100 p-4">
+
+                    <!-- Nombre del recurso -->
+                    <h5 class="fw-bold mb-2">
+                        <i class="bi bi-mortarboard-fill me-2 text-primary"></i>
+                        {{ prod.nombrerecurso|default:"Recurso académico en formación" }}
+                    </h5>
+
+                    <!-- Clasificador -->
+                    <p class="mb-1 text-muted">
+                        <i class="bi bi-tags me-2"></i>
+                        {{ prod.clasificador|default:"Formación académica / autodidacta" }}
+                    </p>
+
+                    <!-- Descripción -->
+                    <p class="mb-3 text-muted">
+                        <i class="bi bi-info-circle me-2"></i>
+                        {{ prod.descripcion|default:"Proceso de aprendizaje orientado al desarrollo de competencias técnicas, académicas y profesionales." }}
+                    </p>
+
+                    <!-- Enlace -->
+                    {% if prod.rutaproductoacademico %}
+                    <div class="mt-3 text-end">
+                        <a href="{{ prod.rutaproductoacademico }}"
+                           target="_blank"
+                           class="btn btn-outline-primary btn-sm fw-semibold">
+                            <i class="bi bi-box-arrow-up-right me-1"></i>
+                            Ver recurso
+                        </a>
+                    </div>
+                    {% endif %}
+
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p class="text-center text-muted fst-italic">
+            Esta sección se encuentra en constante actualización como parte del proceso
+            de formación académica y aprendizaje continuo.
+        </p>
+    {% endif %}
+
+</main>
+
+<style>
+/* Tarjeta Formación */
+.form-card {
+    background: linear-gradient(135deg, #f0f9ff, #e0f2fe);
+    border-left: 4px solid #0284c7;
+    border-radius: 16px;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 14px 28px rgba(0,0,0,0.2);
+}
+</style>
+
+{% endblock %}

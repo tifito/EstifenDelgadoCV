@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<main class="container py-5">
+
+    <h2 class="mb-5 text-center fw-bold">Reconocimientos</h2>
+
+    {% if reconocimientos %}
+        <div class="row g-4 justify-content-center">
+            {% for rec in reconocimientos %}
+            <div class="col-md-6">
+                <div class="card reco-card h-100 p-4">
+
+                    <!-- Tipo -->
+                    <h5 class="fw-bold mb-2">
+                        <i class="bi bi-award-fill me-2 text-warning"></i>
+                        {{ rec.tiporeconocimiento|default:"Reconocimiento académico / profesional" }}
+                    </h5>
+
+                    <!-- Fecha -->
+                    <p class="mb-1 text-muted">
+                        <i class="bi bi-calendar-event me-2"></i>
+                        {{ rec.fechareconocimiento|default:"Fecha no registrada" }}
+                    </p>
+
+                    <!-- Descripción -->
+                    <p class="mb-3 text-muted">
+                        <i class="bi bi-info-circle me-2"></i>
+                        {{ rec.descripcionreconocimiento|default:"Reconocimiento otorgado por el desempeño, compromiso y desarrollo continuo de habilidades académicas o profesionales." }}
+                    </p>
+
+                    <!-- Entidad -->
+                    <p class="mb-1 text-muted">
+                        <i class="bi bi-building me-2"></i>
+                        {{ rec.entidadpatrocinadora|default:"Entidad educativa / institucional" }}
+                    </p>
+
+                    <!-- Contacto -->
+                    <p class="mb-1 text-muted small">
+                        <i class="bi bi-person-lines-fill me-2"></i>
+                        {{ rec.nombrecontactoauspicia|default:"No disponible" }}
+                        {% if rec.telefonocontactoauspicia %}
+                            | {{ rec.telefonocontactoauspicia }}
+                        {% endif %}
+                    </p>
+
+                    <!-- Certificado -->
+                    {% if rec.rutacertificado %}
+                    <div class="mt-3 text-end">
+                        <a href="{{ rec.rutacertificado }}"
+                           target="_blank"
+                           class="btn btn-outline-warning btn-sm fw-semibold">
+                            <i class="bi bi-file-earmark-medical me-1"></i>
+                            Ver reconocimiento
+                        </a>
+                    </div>
+                    {% endif %}
+
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p class="text-center text-muted fst-italic">
+            Esta sección se actualizará a medida que se obtengan reconocimientos
+            académicos, técnicos o profesionales como parte del crecimiento personal.
+        </p>
+    {% endif %}
+
+</main>
+
+<style>
+/* Tarjeta Reconocimientos */
+.reco-card {
+    background: linear-gradient(135deg, #fffaf0, #fef3c7);
+    border-left: 4px solid #f59e0b;
+    border-radius: 16px;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.reco-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 14px 28px rgba(0,0,0,0.2);
+}
+</style>
+
+{% endblock %}

@@ -22,7 +22,7 @@ def reconocimientos(request):
 
 def academico(request):
     datos = ProductosAcademicos.objects.all()
-    context = {'academicos': datos}
+    context = {'academico': datos}
     return render(request, 'academico.html', context)
 
 def laboral(request):

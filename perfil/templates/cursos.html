@@ -3,64 +3,103 @@
 {% block content %}
 <main class="container py-5">
 
-    <h2 class="mb-4 text-center fw-bold">Cursos Realizados</h2>
+    <h2 class="mb-5 text-center fw-bold">Cursos Realizados</h2>
 
     {% if cursos %}
-        <div class="row g-4">
+        <div class="row g-4 justify-content-center">
             {% for curso in cursos %}
             <div class="col-md-6">
                 <div class="card curso-card d-flex flex-column h-100 p-4">
-                    <h5 class="fw-bold mb-3">{{ curso.nombrecurso }}</h5>
 
-                    <p class="mb-1"><strong>Fecha Inicio:</strong> {{ curso.fechainicio }}</p>
-                    <p class="mb-1"><strong>Fecha Fin:</strong> {{ curso.fechafin }}</p>
-                    <p class="mb-1"><strong>Total Horas:</strong> {{ curso.totalhoras }}</p>
-                    <p class="mb-1"><strong>Descripción:</strong> {{ curso.descripcioncurso }}</p>
-                    <p class="mb-1"><strong>Entidad Patrocinadora:</strong> {{ curso.entidadpatrocinadora }}</p>
-                    
+                    <!-- Título -->
+                    <h5 class="fw-bold mb-3">
+                        <i class="bi bi-book-half me-2 text-primary"></i>
+                        {{ curso.nombrecurso }}
+                    </h5>
+
+                    <!-- Fechas -->
+                    <p class="mb-1 text-muted">
+                        <i class="bi bi-calendar-event me-2 text-primary"></i>
+                        <strong>Inicio:</strong> {{ curso.fechainicio }}
+                    </p>
+
+                    <p class="mb-1 text-muted">
+                        <i class="bi bi-calendar-check me-2 text-primary"></i>
+                        <strong>Fin:</strong> {{ curso.fechafin }}
+                    </p>
+
+                    <!-- Horas -->
+                    <p class="mb-1 text-muted">
+                        <i class="bi bi-clock-history me-2 text-primary"></i>
+                        <strong>Horas:</strong> {{ curso.totalhoras }}
+                    </p>
+
+                    <!-- Descripción -->
+                    <p class="mb-2 text-muted">
+                        <i class="bi bi-info-circle me-2 text-primary"></i>
+                        {{ curso.descripcioncurso }}
+                    </p>
+
+                    <!-- Entidad -->
+                    <p class="mb-1 text-muted">
+                        <i class="bi bi-building me-2 text-primary"></i>
+                        {{ curso.entidadpatrocinadora }}
+                    </p>
+
                     {% if curso.nombrecontactoauspicia %}
-                        <p class="mb-1"><strong>Contacto Auspicia:</strong> {{ curso.nombrecontactoauspicia }}</p>
-                    {% endif %}
-                    {% if curso.telefonocontactoauspicia %}
-                        <p class="mb-1"><strong>Teléfono Contacto:</strong> {{ curso.telefonocontactoauspicia }}</p>
-                    {% endif %}
-                    {% if curso.emailempresapatrocinadora %}
-                        <p class="mb-1"><strong>Email:</strong> {{ curso.emailempresapatrocinadora }}</p>
+                    <p class="mb-1 text-muted">
+                        <i class="bi bi-person-badge me-2 text-primary"></i>
+                        {{ curso.nombrecontactoauspicia }}
+                    </p>
                     {% endif %}
 
-                    <!-- Botón abajo siempre -->
+                    {% if curso.telefonocontactoauspicia %}
+                    <p class="mb-1 text-muted">
+                        <i class="bi bi-telephone me-2 text-primary"></i>
+                        {{ curso.telefonocontactoauspicia }}
+                    </p>
+                    {% endif %}
+
+                    {% if curso.emailempresapatrocinadora %}
+                    <p class="mb-3 text-muted">
+                        <i class="bi bi-envelope me-2 text-primary"></i>
+                        {{ curso.emailempresapatrocinadora }}
+                    </p>
+                    {% endif %}
+
+                    <!-- Botón -->
                     <div class="mt-auto d-flex justify-content-end">
                         {% if curso.rutacertificado %}
-                            <a href="{{ curso.rutacertificado }}" target="_blank" 
-                               class="btn btn-outline-secondary fw-semibold">
-                                Ver Diploma
-                            </a>
+                        <a href="{{ curso.rutacertificado }}" target="_blank"
+                           class="btn btn-outline-primary fw-semibold">
+                            <i class="bi bi-award me-1"></i>
+                            Ver Diploma
+                        </a>
                         {% endif %}
                     </div>
+
                 </div>
             </div>
             {% endfor %}
         </div>
     {% else %}
-        <p class="text-center">No hay cursos registrados.</p>
+        <p class="text-center text-muted">No hay cursos registrados.</p>
     {% endif %}
 
 </main>
 
 <style>
-/* Tarjetas de cursos con borde y esquinas más marcadas */
+/* Tarjeta de cursos */
 .curso-card {
-    background-color: #eceff2; /* gris más marcado */
-    border-radius: 16px; /* esquinas más redondeadas */
-    border: 2px solid #c1c7cd; /* borde visible */
-    box-shadow: 0 6px 18px rgba(191, 53, 53, 0.15); /* sombra más definida */
-    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+    background: linear-gradient(135deg, #f4f7ff, #e8eeff);
+    border-left: 4px solid #2563eb; /* AZUL */
+    border-radius: 16px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .curso-card:hover {
     transform: translateY(-6px);
-    box-shadow: 0 14px 28px rgba(0,0,0,0.25);
-    background-color: #dce4eb; /* cambio de color al pasar el mouse */
+    box-shadow: 0 14px 28px rgba(0,0,0,0.2);
 }
 </style>
 {% endblock %}

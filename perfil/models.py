@@ -19,6 +19,7 @@ class DatosPersonales(models.Model):
     direcciondomiciliaria = models.CharField(max_length=50, blank=True, null=True)
     sitioweb = models.CharField(max_length=60, blank=True, null=True)
     email = models.EmailField(max_length=100, blank=True, null=True)
+    fotodeperfil=models.CharField(max_length=500, blank=True, null=True)
 
     def __str__(self):
         return f"{self.nombres} {self.apellidos}"
@@ -38,7 +39,7 @@ class ExperienciaLaboral(models.Model):
     fechafingestion = models.DateField(blank=True, null=True)
     descripcionfunciones = models.CharField(max_length=100, blank=True, null=True)
     activarparaqueseveaenfront = models.BooleanField(default=True)
-    rutacertificado = models.CharField(max_length=100, blank=True, null=True)
+    rutacertificado = models.CharField(max_length=500, blank=True, null=True)
 
     def __str__(self):
         return f"{self.cargodesempenado} en {self.nombrempresa}"
@@ -57,7 +58,7 @@ class Reconocimientos(models.Model):
     nombrecontactoauspicia = models.CharField(max_length=100, blank=True, null=True)
     telefonocontactoauspicia = models.CharField(max_length=60, blank=True, null=True)
     activarparaqueseveaenfront = models.BooleanField(default=True)
-    rutacertificado = models.CharField(max_length=100, blank=True, null=True)
+    rutacertificado = models.CharField(max_length=500, blank=True, null=True)
 
     def __str__(self):
         return f"{self.tiporeconocimiento} - {self.perfil}"
@@ -76,7 +77,7 @@ class CursoRealizado(models.Model):
     telefonocontactoauspicia = models.CharField(max_length=60, blank=True, null=True)
     emailempresapatrocinadora = models.CharField(max_length=60, blank=True, null=True)
     activarparaqueseveaenfront = models.BooleanField(default=True)
-    rutacertificado = models.CharField(max_length=100, blank=True, null=True)
+    rutacertificado = models.CharField(max_length=500, blank=True, null=True)
 
     def __str__(self):
         return f"{self.nombrecurso} - {self.perfil}"
@@ -89,7 +90,7 @@ class ProductosAcademicos(models.Model):
     clasificador = models.CharField(max_length=100, blank=True, null=True)
     descripcion = models.CharField(max_length=100, blank=True, null=True)
     activarparaqueseveaenfront = models.BooleanField(default=True)
-
+    rutaproductoacademico=models.CharField(max_length=500, blank=True, null=True)
     def __str__(self):
         return f"{self.nombrerecurso} - {self.perfil}"
 
@@ -99,9 +100,9 @@ class ProductoLaboral(models.Model):
     perfil = models.ForeignKey(DatosPersonales, on_delete=models.CASCADE)
     nombreproducto = models.CharField(max_length=100)
     fechaproducto = models.DateField(blank=True, null=True)
-    descripcion = models.CharField(max_length=100, blank=True, null=True)
+    descripcion = models.CharField(max_length=1000, blank=True, null=True)
     activarparaqueseveaenfront = models.BooleanField(default=True)
-
+    rutaproductolaboral = models.CharField(max_length=500, blank=True, null=True)
     def __str__(self):
         return f"{self.nombreproducto} - {self.perfil}"
 
@@ -114,6 +115,7 @@ class VentaGarage(models.Model):
     descripcion = models.CharField(max_length=1000, blank=True, null=True)
     valordelbien = models.DecimalField(max_digits=7, decimal_places=2, blank=True, null=True)
     activarparaqueseveaenfront = models.BooleanField(default=True)
+    rutaproducto = models.CharField(max_length=500, blank=True, null=True)
 
     def __str__(self):
         return f"{self.nombreproducto} - {self.perfil}"

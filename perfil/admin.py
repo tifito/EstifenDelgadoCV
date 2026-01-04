@@ -16,7 +16,7 @@ class DatosPersonalesAdmin(admin.ModelAdmin):
         'descripcionperfil', 'perfilactivo', 'apellidos', 'nombres', 'nacionalidad',
         'lugarnacimiento', 'fechanacimiento', 'numerocedula', 'sexo', 'estadocivil',
         'licenciaconducir', 'telefonoconvencional', 'telefonofijo', 'direcciontrabajo',
-        'direcciondomiciliaria', 'sitioweb', 'email',
+        'direcciondomiciliaria', 'sitioweb', 'email', 'fotodeperfil',
     )
 
 @admin.register(ExperienciaLaboral)
@@ -53,14 +53,14 @@ class CursoRealizadoAdmin(admin.ModelAdmin):
 class ProductosAcademicosAdmin(admin.ModelAdmin):
     list_display = ('nombrerecurso', 'clasificador', 'activarparaqueseveaenfront')
     fields = (
-        'perfil', 'nombrerecurso', 'clasificador', 'descripcion', 'activarparaqueseveaenfront'
+        'perfil', 'nombrerecurso', 'clasificador', 'descripcion', 'activarparaqueseveaenfront', 'rutaproductoacademico',
     )
 
 @admin.register(ProductoLaboral)
 class ProductoLaboralAdmin(admin.ModelAdmin):
     list_display = ('nombreproducto', 'fechaproducto', 'activarparaqueseveaenfront')
     fields = (
-        'perfil', 'nombreproducto', 'fechaproducto', 'descripcion', 'activarparaqueseveaenfront'
+        'perfil', 'nombreproducto', 'fechaproducto', 'descripcion', 'activarparaqueseveaenfront', 'rutaproductolaboral',
     )
 
 @admin.register(VentaGarage)
@@ -69,5 +69,5 @@ class VentaGarageAdmin(admin.ModelAdmin):
     list_filter = ('estadoproducto', 'activarparaqueseveaenfront')
     fields = (
         'perfil', 'nombreproducto', 'estadoproducto', 'descripcion', 'valordelbien',
-        'activarparaqueseveaenfront'
+        'activarparaqueseveaenfront', 'rutaproducto',
     )

@@ -31,7 +31,8 @@ urlpatterns = [
     path('academico/', views.academico, name='academico'),
     path('laboral/', views.laboral, name='laboral'),
     path('garage/', views.garage, name='garage'),
-    path('experiencia/', views.experiencia, name='experiencia'), 
+    path('experiencia/', views.experiencia, name='experiencia'),
+    path('cv-pdf/', views.cv_pdf, name='cv_pdf'),
 ]
 
 

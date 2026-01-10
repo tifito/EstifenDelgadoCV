@@ -1,4 +1,7 @@
 from django.shortcuts import render
+from django.template.loader import get_template
+from xhtml2pdf import pisa
+from django.http import HttpResponse
 from .models import DatosPersonales, CursoRealizado, Reconocimientos, ProductosAcademicos, ProductoLaboral, VentaGarage, ExperienciaLaboral
 
 def home(request):
@@ -41,3 +44,25 @@ def experiencia(request):
 def perfil_activo():
     perfil = DatosPersonales.objects.first()
     return perfil if perfil and perfil.perfilactivo else None
+
+
+
+
+def cv_pdf(request):
+    perfil = DatosPersonales.objects.filter(perfilactivo=True).first()
+
+    context = {
+        'perfil': perfil,
+        'academico': ProductosAcademicos.objects.filter(activarparaqueseveaenfront=True),
+        'cursos': CursoRealizado.objects.filter(activarparaqueseveaenfront=True),
+        'experiencias': ExperienciaLaboral.objects.all(),
+    }
+
+    template = get_template('cvpdf.html')
+    html = template.render(context)
+
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = 'inline; filename="cv.pdf"'  # 👈 NO descarga automática
+
+    pisa.CreatePDF(html, dest=response)
+    return response

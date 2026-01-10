@@ -32,15 +32,19 @@
                         <strong>Horas:</strong> {{ curso.totalhoras }}
                     </p>
 
+                    {% if curso.descripcioncurso %}
                     <p class="mb-2 text-muted">
                         <i class="bi bi-info-circle me-2 text-primary"></i>
                         {{ curso.descripcioncurso }}
                     </p>
+                    {% endif %}
 
+                    {% if curso.entidadpatrocinadora %}
                     <p class="mb-1 text-muted">
                         <i class="bi bi-building me-2 text-primary"></i>
                         {{ curso.entidadpatrocinadora }}
                     </p>
+                    {% endif %}
 
                     {% if curso.nombrecontactoauspicia %}
                     <p class="mb-1 text-muted">
@@ -63,15 +67,15 @@
                     </p>
                     {% endif %}
 
+                    {% if curso.rutacertificado %}
                     <div class="mt-auto d-flex justify-content-end">
-                        {% if curso.rutacertificado %}
                         <a href="{{ curso.rutacertificado.url }}" target="_blank"
                            class="btn btn-outline-primary fw-semibold">
                             <i class="bi bi-award me-1"></i>
                             Ver Diploma
                         </a>
-                        {% endif %}
                     </div>
+                    {% endif %}
 
                 </div>
             </div>

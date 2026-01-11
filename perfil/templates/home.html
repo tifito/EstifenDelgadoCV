@@ -10,8 +10,8 @@
             <!-- FOTO PERFIL -->
             <div class="col-md-3 text-center mb-3 mb-md-0">
                 <div class="foto-wrapper mx-auto">
-                    {% if perfil.fotoperfil %}
-                        <img src="{{ perfil.fotoperfil.url }}" class="foto-perfil" alt="Foto Perfil">
+                    {% if perfil.fotodeperfil %}
+                        <img src="{{ perfil.fotodeperfil.url }}" class="foto-perfil" alt="Foto Perfil">
                     {% elif perfil.fotodeperfil %}
                         <img src="{{ perfil.fotodeperfil }}" class="foto-perfil" alt="Foto Perfil">
                     {% else %}

@@ -55,7 +55,9 @@ def cv_pdf(request):
         'perfil': perfil,
         'academico': ProductosAcademicos.objects.filter(activarparaqueseveaenfront=True),
         'cursos': CursoRealizado.objects.filter(activarparaqueseveaenfront=True),
-        'experiencias': ExperienciaLaboral.objects.all(),
+        'experiencias': ExperienciaLaboral.objects.filter(activarparaqueseveaenfront=True),
+        'productos':ProductoLaboral.objects.filter(activarparaqueseveaenfront=True),
+        'reconocimientos':Reconocimientos.objects.filter(activarparaqueseveaenfront=True),
     }
 
     template = get_template('cvpdf.html')

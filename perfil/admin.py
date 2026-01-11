@@ -12,7 +12,7 @@ class DatosPersonalesAdmin(admin.ModelAdmin):
         'descripcionperfil', 'perfilactivo', 'apellidos', 'nombres', 'nacionalidad',
         'lugarnacimiento', 'fechanacimiento', 'numerocedula', 'sexo', 'estadocivil',
         'licenciaconducir', 'telefonoconvencional', 'telefonofijo', 'direcciontrabajo',
-        'direcciondomiciliaria', 'sitioweb', 'email', 'fotodeperfil',
+        'direcciondomiciliaria', 'sitioweb', 'email', 'fotodeperfil', 'titulodescripcion',
     )
 
 @admin.register(ExperienciaLaboral)

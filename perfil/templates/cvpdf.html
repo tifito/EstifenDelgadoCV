@@ -4,87 +4,244 @@
     <meta charset="UTF-8">
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: Arial, Helvetica, sans-serif;
             margin: 40px;
+            color: #111827;
+            font-size: 11px;
+        }
+
+        /* ===== HEADER ===== */
+        .header {
+            width: 100%;
+            margin-bottom: 30px;
+        }
+
+        .header-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .header-left {
+            width: 75%;
+            vertical-align: top;
+            padding-top: 18px;
+        }
+
+        .header-right {
+            width: 25%;
+            text-align: right;
+            vertical-align: top;
+            padding-top: 18px;
+        }
+
+        .header h1 {
+            font-size: 24px;
+            margin: 0 0 4px 0; 
+            text-transform: uppercase;
+            letter-spacing: 1px;
             color: #111827;
         }
 
-        h1 {
-            font-size: 26px;
-            text-align: center;
-            margin-bottom: 5px;
-        }
+        .titulo-profesional {
+            font-size: 13px;
+            color: #1f4ed8;
+            font-weight: bold;
+            line-height: 1.2;
+            margin: 0 0 2px 0;
+        }       
 
         .contacto {
-            text-align: center;
-            font-size: 11px;
+            font-size: 10px;
             color: #555;
-            margin-bottom: 20px;
+            margin: 0;
+            line-height: 1.2;
         }
 
+        .foto {
+            width: 110px;
+            border: 1px solid #d1d5db;
+        }
+
+        /* ===== SECCIONES ===== */
         .seccion {
             margin-top: 25px;
         }
 
         .seccion h2 {
-            font-size: 14px;
-            color: #2563eb;
-            border-bottom: 1px solid #2563eb;
+            font-size: 13px;
+            color: #1f4ed8;
+            border-bottom: 1px solid #1f4ed8;
             padding-bottom: 4px;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
+        /* ===== RESUMEN ===== */
+        .resumen {
+            font-size: 11px;
+            color: #374151;
+            line-height: 1.5;
+            text-align: justify;
+        }
+
+        /* ===== ITEMS ===== */
         .item {
-            margin-bottom: 10px;
+            margin-bottom: 12px;
         }
 
         .item b {
-            font-size: 12px;
+            font-size: 11.5px;
+            color: #111;
+            display: block; /* título arriba */
+            margin-bottom: 2px;
         }
 
-        .item p {
-            font-size: 11px;
-            margin: 2px 0;
+        .item .desc {
+            font-size: 10.5px;
+            color: #4b5563;
+            line-height: 1.4;
+            margin: 2px 0 0 0;
+        }
+
+        .item .sub {
+            font-size: 10.5px;
+            color: #374151;
+            margin: 0;
+            display: inline-block;
+            margin-left: 6px; /* separación de la fecha */
+        }
+
+        .curso-desc {
+            font-size: 10.5px;
+            color: #4b5563;
+            display: block;
+            margin-top: 2px;
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            margin-top: 40px;
+            text-align: center;
+            font-size: 9px;
+            color: #9ca3af;
         }
     </style>
 </head>
+
 <body>
 
-<h1>{{ perfil.nombres }} {{ perfil.apellidos }}</h1>
-<div class="contacto">
-    {{ perfil.email }} · {{ perfil.direccion }}
+<!-- ===== HEADER ===== -->
+<div class="header">
+    <table class="header-table">
+        <tr>
+            <td class="header-left">
+                <h1>{{ perfil.nombres }} {{ perfil.apellidos }}</h1>
+                <div class="titulo-profesional">
+                    {{ perfil.titulodescripcion }}
+                </div>
+                <div class="contacto">
+                    {{ perfil.email }} / {{ perfil.direcciondomiciliaria }} / {{ perfil.telefonofijo }}
+                </div>
+            </td>
+            <td class="header-right">
+                {% if perfil.fotodeperfil %}
+                    <img src="{{ perfil.fotodeperfil.url }}" class="foto">
+                {% endif %}
+            </td>
+        </tr>
+    </table>
 </div>
 
+<!-- ===== PERFIL PROFESIONAL ===== -->
+{% if perfil.descripcionperfil %}
 <div class="seccion">
-    <h2>FORMACIÓN ACADÉMICA</h2>
+    <h2>Perfil profesional</h2>
+    <div class="resumen">
+        {{ perfil.descripcionperfil }}
+    </div>
+</div>
+{% endif %}
+
+<!-- ===== FORMACIÓN ACADÉMICA ===== -->
+{% if academico %}
+<div class="seccion">
+    <h2>Formación académica</h2>
     {% for a in academico %}
         <div class="item">
-            <b>{{ a.nombrerecurso }}</b>
-            <p>{{ a.descripcion }}</p>
+            <b>{{ a.nombrerecurso }}{% if a.fechafin %} · {{ a.fechafin }}{% endif %}</b>
+            {% if a.descripcion %}
+                <div class="desc">{{ a.descripcion }}</div>
+            {% endif %}
         </div>
     {% endfor %}
 </div>
+{% endif %}
 
+<!-- ===== CURSOS REALIZADOS ===== -->
+{% if cursos %}
 <div class="seccion">
-    <h2>CURSOS REALIZADOS</h2>
+    <h2>Cursos realizados</h2>
     {% for c in cursos %}
         <div class="item">
-            <b>{{ c.nombrecurso }}</b>
-            <p>{{ c.entidadpatrocinadora }} · {{ c.totalhoras }} horas</p>
+            <b>{{ c.nombrecurso }}{% if c.fechafin %} · {{ c.fechafin }}{% endif %}</b>
+            {% if c.descripcioncurso %}
+                <div class="desc">{{ c.descripcioncurso }}</div>
+            {% endif %}
+            <div class="sub">{{ c.entidadpatrocinadora }} / {{ c.totalhoras }} horas</div>
         </div>
     {% endfor %}
 </div>
+{% endif %}
 
+<!-- ===== EXPERIENCIA LABORAL ===== -->
+{% if experiencias %}
 <div class="seccion">
-    <h2>EXPERIENCIA LABORAL</h2>
+    <h2>Experiencia laboral</h2>
     {% for e in experiencias %}
         <div class="item">
-            <b>{{ e.cargo }}</b>
-            <p>{{ e.empresa }}</p>
-            <p>{{ e.descripcion }}</p>
+            <b>{{ e.cargodesempenado }}</b>
+            <div class="sub">
+                {{ e.nombrempresa }}{% if e.lugarempresa %}, {{ e.lugarempresa }}{% endif %}{% if e.fechafingestion %} · {{ e.fechafingestion }}{% endif %}
+            </div>
+            {% if e.descripcionfunciones %}
+                <div class="desc">{{ e.descripcionfunciones }}</div>
+            {% endif %}
         </div>
     {% endfor %}
 </div>
+{% endif %}
+
+<!-- ===== PRODUCTO LABORAL ===== -->
+{% if productos %}
+<div class="seccion">
+    <h2>Producto laboral</h2>
+    {% for p in productos %}
+        <div class="item">
+            <b>{{ p.nombreproducto }}{% if p.fechaproducto %} · {{ p.fechaproducto }}{% endif %}</b>
+            {% if p.descripcion %}
+                <div class="desc">{{ p.descripcion }}</div>
+            {% endif %}
+        </div>
+    {% endfor %}
+</div>
+{% endif %}
+
+<!-- ===== RECONOCIMIENTOS ===== -->
+{% if reconocimientos %}
+<div class="seccion">
+    <h2>Reconocimientos</h2>
+    {% for r in reconocimientos %}
+        <div class="item">
+            <b>{{ r.tiporeconocimiento }}{% if r.fechareconocimiento %} · {{ r.fechareconocimiento }}{% endif %}</b>
+            {% if r.descripcionreconocimiento %}
+                <div class="desc">{{ r.descripcionreconocimiento }}</div>
+            {% endif %}
+            <div class="sub">{{ r.entidadpatrocinadora }}</div>
+        </div>
+    {% endfor %}
+</div>
+{% endif %}
 
 </body>
 </html>

@@ -3,6 +3,7 @@ from cloudinary.models import CloudinaryField
 # Tabla principal: Perfil
 class DatosPersonales(models.Model):
     descripcionperfil = models.CharField(max_length=500)
+    titulodescripcion=models.CharField(max_length=200)
     perfilactivo = models.BooleanField(default=True)
     apellidos = models.CharField(max_length=60)
     nombres = models.CharField(max_length=60)

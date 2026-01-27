@@ -33,7 +33,7 @@ class ReconocimientosAdmin(admin.ModelAdmin):
     fields = (
         'perfil', 'tiporeconocimiento', 'fechareconocimiento', 'descripcionreconocimiento',
         'entidadpatrocinadora', 'nombrecontactoauspicia', 'telefonocontactoauspicia',
-        'activarparaqueseveaenfront', 'rutacertificado'
+        'activarparaqueseveaenfront', 'rutacertificado', 'reconocimientodelacolumnadearriba', 
     )
 
 @admin.register(CursoRealizado)

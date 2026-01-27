@@ -29,7 +29,7 @@ def home(request):
 
 
 # -------------------------
-# CURSOS (ordenados por fecha inicio)
+# CURSOS
 # -------------------------
 def cursos(request):
     perfil = perfil_activo()
@@ -45,9 +45,7 @@ def cursos(request):
     })
 
 
-# -------------------------
-# RECONOCIMIENTOS (ordenados por fecha reconocimiento)
-# -------------------------
+
 def reconocimientos(request):
     perfil = perfil_activo()
     datos = (
@@ -62,10 +60,6 @@ def reconocimientos(request):
     })
 
 
-# -------------------------
-# PRODUCTOS ACADÉMICOS
-# (no llevan fecha → no se ordenan)
-# -------------------------
 def academico(request):
     perfil = perfil_activo()
     datos = (
@@ -79,9 +73,7 @@ def academico(request):
     })
 
 
-# -------------------------
-# PRODUCTO LABORAL (ordenado por fecha producto)
-# -------------------------
+
 def laboral(request):
     perfil = perfil_activo()
     productos = (
@@ -96,9 +88,7 @@ def laboral(request):
     })
 
 
-# -------------------------
-# VENTA DE GARAGE (ordenado por fecha publicación)
-# -------------------------
+
 def garage(request):
     perfil = perfil_activo()
     productos = (
@@ -113,10 +103,7 @@ def garage(request):
     })
 
 
-# -------------------------
-# EXPERIENCIA LABORAL
-# (ordenada por fecha inicio)
-# -------------------------
+
 def experiencia(request):
     perfil = perfil_activo()
     datos = (
@@ -131,24 +118,49 @@ def experiencia(request):
     })
 
 
-# -------------------------
-# PDF CV (respetando orden cronológico)
-# -------------------------
 def cv_pdf(request):
     perfil = perfil_activo()
 
+    if not perfil:
+        return HttpResponse("Perfil no disponible", status=404)
+
+    mostrar_perfil = 'perfil' in request.GET
+    mostrar_descripcion = 'descripcion' in request.GET
+    mostrar_educacion = 'educacion' in request.GET
+    mostrar_experiencia = 'experiencia' in request.GET
+    mostrar_cursos = 'cursos' in request.GET
+    mostrar_reconocimientos = 'reconocimientos' in request.GET
+    mostrar_productos = 'productos' in request.GET
+
     context = {
         'perfil': perfil,
-        'academico': ProductosAcademicos.objects.filter(activarparaqueseveaenfront=True),
+
+        # FLAGS PARA EL TEMPLATE
+        'mostrar_perfil': mostrar_perfil,
+        'mostrar_descripcion': mostrar_descripcion,
+        'mostrar_educacion': mostrar_educacion,
+        'mostrar_experiencia': mostrar_experiencia,
+        'mostrar_cursos': mostrar_cursos,
+        'mostrar_reconocimientos': mostrar_reconocimientos,
+        'mostrar_productos': mostrar_productos,
+
+        # DATA
+        'academico': ProductosAcademicos.objects.filter(
+            activarparaqueseveaenfront=True
+        ),
+
         'cursos': CursoRealizado.objects.filter(
             activarparaqueseveaenfront=True
         ).order_by('-fechainicio'),
+
         'experiencias': ExperienciaLaboral.objects.filter(
             activarparaqueseveaenfront=True
         ).order_by('-fechainiciogestion'),
+
         'productos': ProductoLaboral.objects.filter(
             activarparaqueseveaenfront=True
         ).order_by('-fechaproducto'),
+
         'reconocimientos': Reconocimientos.objects.filter(
             activarparaqueseveaenfront=True
         ).order_by('-fechareconocimiento'),
@@ -159,6 +171,7 @@ def cv_pdf(request):
 
     response = HttpResponse(content_type='application/pdf')
     response['Content-Disposition'] = 'inline; filename="cv.pdf"'
+
     pisa.CreatePDF(html, dest=response)
 
     return response

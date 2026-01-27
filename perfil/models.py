@@ -92,7 +92,9 @@ class Reconocimientos(models.Model):
     nombrecontactoauspicia = models.CharField(max_length=100, blank=True, null=True)
     telefonocontactoauspicia = models.CharField(max_length=60, blank=True, null=True)
     activarparaqueseveaenfront = models.BooleanField(default=True)
-    rutacertificado = CloudinaryField('certificado', blank=True, null=True)
+    rutacertificado = CloudinaryField('reconocimiento_PDFIMG', blank=True, null=True)
+    reconocimientodelacolumnadearriba = CloudinaryField('certificado_IMG', blank=True, null=True)
+
 
     def clean(self):
         if self.fechareconocimiento > timezone.now().date():

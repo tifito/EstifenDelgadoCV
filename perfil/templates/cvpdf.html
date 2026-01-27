@@ -10,7 +10,6 @@
             font-size: 11px;
         }
 
-        
         .header {
             width: 100%;
             margin-bottom: 30px;
@@ -36,7 +35,7 @@
 
         .header h1 {
             font-size: 24px;
-            margin: 0 0 4px 0; 
+            margin: 0 0 4px 0;
             text-transform: uppercase;
             letter-spacing: 1px;
             color: #111827;
@@ -48,7 +47,7 @@
             font-weight: bold;
             line-height: 1.2;
             margin: 0 0 2px 0;
-        }       
+        }
 
         .contacto {
             font-size: 10px;
@@ -61,9 +60,10 @@
             width: 110px;
             border: 1px solid #d1d5db;
         }
+
         .item {
-         margin-bottom: 8px;
-        }   
+            margin-bottom: 8px;
+        }
 
         .seccion h2 {
             font-size: 13px;
@@ -75,23 +75,23 @@
             letter-spacing: 0.5px;
         }
 
-        
         .resumen {
             font-size: 11px;
             color: #374151;
             line-height: 1.4;
             text-align: justify;
-            margin-bottom: 6px; 
+            margin-bottom: 6px;
         }
+
         .seccion {
             margin-top: 18px;
             page-break-inside: avoid;
-        }       
+        }
 
         .item b {
             font-size: 11.5px;
             color: #111;
-            display: block; 
+            display: block;
             margin-bottom: 2px;
         }
 
@@ -99,38 +99,21 @@
             font-size: 10.5px;
             color: #4b5563;
             line-height: 1.4;
-            margin: 2px 0 0 0;
             margin-top: 3px;
         }
 
         .item .sub {
             font-size: 10.5px;
             color: #374151;
-            margin: 0;
-            display: inline-block;
-            margin-left: 6px; 
-        }
-
-        .curso-desc {
-            font-size: 10.5px;
-            color: #4b5563;
-            display: block;
-            margin-top: 2px;
-        }
-
-        
-        .footer {
-            margin-top: 40px;
-            text-align: center;
-            font-size: 9px;
-            color: #9ca3af;
+            margin-left: 6px;
         }
     </style>
 </head>
 
 <body>
 
-<!-- HEADER  -->
+<!-- HEADER -->
+{% if mostrar_perfil %}
 <div class="header">
     <table class="header-table">
         <tr>
@@ -160,10 +143,10 @@
         </tr>
     </table>
 </div>
-
+{% endif %}
 
 <!-- PERFIL PROFESIONAL -->
-{% if perfil.descripcionperfil %}
+{% if mostrar_descripcion and perfil.descripcionperfil %}
 <div class="seccion">
     <h2>Perfil profesional</h2>
     <div class="resumen">
@@ -172,8 +155,8 @@
 </div>
 {% endif %}
 
-<!--  FORMACIÓN ACADÉMICA  -->
-{% if academico %}
+<!-- FORMACIÓN ACADÉMICA -->
+{% if mostrar_educacion and academico %}
 <div class="seccion">
     <h2>Formación académica</h2>
     {% for a in academico %}
@@ -187,8 +170,8 @@
 </div>
 {% endif %}
 
-<!--  CURSOS REALIZADOS  -->
-{% if cursos %}
+<!-- CURSOS -->
+{% if mostrar_cursos and cursos %}
 <div class="seccion">
     <h2>Cursos realizados</h2>
     {% for c in cursos %}
@@ -203,15 +186,16 @@
 </div>
 {% endif %}
 
-<!--  EXPERIENCIA LABORAL  -->
-{% if experiencias %}
+<!-- EXPERIENCIA -->
+{% if mostrar_experiencia and experiencias %}
 <div class="seccion">
     <h2>Experiencia laboral</h2>
     {% for e in experiencias %}
         <div class="item">
             <b>{{ e.cargodesempenado }}</b>
             <div class="sub">
-                {{ e.nombrempresa }}{% if e.lugarempresa %}, {{ e.lugarempresa }}{% endif %}{% if e.fechafingestion %} · {{ e.fechafingestion }}{% endif %}
+                {{ e.nombrempresa }}{% if e.lugarempresa %}, {{ e.lugarempresa }}{% endif %}
+                {% if e.fechafingestion %} · {{ e.fechafingestion }}{% endif %}
             </div>
             {% if e.descripcionfunciones %}
                 <div class="desc">{{ e.descripcionfunciones }}</div>
@@ -221,30 +205,23 @@
 </div>
 {% endif %}
 
-<!--  PRODUCTO LABORAL  -->
-{% if productos %}
+<!-- PRODUCTO LABORAL -->
+{% if mostrar_productos and productos %}
 <div class="seccion">
     <h2>Producto laboral</h2>
     {% for p in productos %}
         <div class="item">
-            <b>
-                {{ p.nombreproducto }}
-                {% if p.fechaproducto %} · {{ p.fechaproducto }}{% endif %}
-            </b>
-
-            {% if p.descripcion %} 
-                <div class="desc">
-                    {{ p.descripcion }}
-                </div>
+            <b>{{ p.nombreproducto }}{% if p.fechaproducto %} · {{ p.fechaproducto }}{% endif %}</b>
+            {% if p.descripcion %}
+                <div class="desc">{{ p.descripcion }}</div>
             {% endif %}
         </div>
     {% endfor %}
 </div>
 {% endif %}
 
-
-<!--  RECONOCIMIENTOS  -->
-{% if reconocimientos %}
+<!-- RECONOCIMIENTOS -->
+{% if mostrar_reconocimientos and reconocimientos %}
 <div class="seccion">
     <h2>Reconocimientos</h2>
     {% for r in reconocimientos %}
@@ -259,54 +236,36 @@
 </div>
 {% endif %}
 
+<!-- CERTIFICADOS (CURSOS + RECONOCIMIENTOS) -->
+{% if mostrar_cursos or mostrar_reconocimientos %}
 
-
-{% if cursos %}
-<div class="seccion" style="page-break-before: always;">
-
-    
-    <div style="
-        color: white;
-        font-size: 60px;
-        line-height: 1.6;
-        text-align: center;
-    ">
-        <br>
-        ESPACIO<br>
-        ESPACIO<br>
-        ESPACIO
-    </div>
-
-    <h2 style="
-        color:#000;
-        font-size:50px;
-        text-align:center;
-        border-bottom:none;
-        letter-spacing:3px;
-        margin:0;
-    ">
+<div style="page-break-before: always; text-align:center; margin-top:180px;">
+    <h2 style="font-size:28px; border-bottom:none; color:#1f4ed8; letter-spacing:3px;">
         CERTIFICADOS
     </h2>
-
 </div>
 
-<!--CERTIFICADOS -->
-{% for c in cursos %}
-    {% if c.imagendelacolumnadearriba %}
-        <div class="item" style="page-break-before: always; text-align:center;">
-            <img 
-                src="{{ c.imagendelacolumnadearriba.url }}" 
-                style="width:100%; max-width:500px;"
-            >
-        </div>
-    {% endif %}
-{% endfor %}
+{% if mostrar_cursos and cursos %}
+    {% for c in cursos %}
+        {% if c.imagendelacolumnadearriba %}
+            <div style="page-break-before: always; text-align:center;">
+                <img src="{{ c.imagendelacolumnadearriba.url }}" style="width:100%; max-width:500px;">
+            </div>
+        {% endif %}
+    {% endfor %}
 {% endif %}
 
-        
+{% if mostrar_reconocimientos and reconocimientos %}
+    {% for r in reconocimientos %}
+        {% if r.reconocimientodelacolumnadearriba %}
+            <div style="page-break-before: always; text-align:center;">
+                <img src="{{ r.reconocimientodelacolumnadearriba }}" style="width:100%; max-width:500px;">
+            </div>
+        {% endif %}
+    {% endfor %}
+{% endif %}
 
-
-
+{% endif %}
 
 </body>
 </html>
